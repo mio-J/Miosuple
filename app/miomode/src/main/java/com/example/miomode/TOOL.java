@@ -1,17 +1,13 @@
 package com.example.miomode;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -19,7 +15,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-
+//v16.14
 public class TOOL {
     static public String mainurl="http://124.93.196.45:10001";
     static public Object[] usermsg=new String[]{"","","","","",""};
