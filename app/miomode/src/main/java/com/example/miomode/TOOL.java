@@ -8,6 +8,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -20,6 +23,7 @@ public class TOOL {
     static public String mainurl="http://124.93.196.45:10001";
     static public Object[] usermsg=new String[]{"","","","","",""};
     static public String Tokin="";
+    static public ArrayList<HashMap<String,Object>> Alldata;
 
     static public void GETS(String url, Callback callback)
     {
