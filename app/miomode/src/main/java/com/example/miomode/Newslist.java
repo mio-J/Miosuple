@@ -12,6 +12,7 @@ import java.util.HashMap;
 
 public class Newslist extends ListView {
     ArrayList<HashMap<String,Object>> data;
+    ArrayList<HashMap<String,Object>> Alldata;
 
     public Newslist(Context context) {
         super(context);
@@ -19,7 +20,6 @@ public class Newslist extends ListView {
 
     public Newslist(Context context, AttributeSet attrs) {
         super(context, attrs);
-        getnews(0);
         setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -38,13 +38,17 @@ public class Newslist extends ListView {
         super.onMeasure(widthMeasureSpec,MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE>>2,MeasureSpec.AT_MOST));
     }
 
+    public void setAlldata(ArrayList<HashMap<String, Object>> alldata) {
+        Alldata = alldata;
+    }
+
     public void getnews(int page)
     {
         data=new ArrayList<>();
         String[] id=new String[]{"13","14","15","24","5"};
-        for (int i = 0; i < Guide.data.size(); i++) {
-            if (Guide.data.get(i).get("type").equals(id[page]))
-                data.add(Guide.data.get(i));
+        for (int i = 0; i < Alldata.size(); i++) {
+            if (Alldata.get(i).get("type").equals(id[page]))
+                data.add(Alldata.get(i));
         }
         setAdapter(new Imgadapter(getContext(),data,R.layout.newslist,
                 new String[]{"h1","h2","h3","h4","h5"},new int[]{R.id.h1,R.id.h2,R.id.h3,R.id.h4,R.id.h5}));
@@ -55,7 +59,7 @@ public class Newslist extends ListView {
     {
         data=new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-                data.add(Guide.data.get(i));
+                data.add(Alldata.get(i));
         }
         setAdapter(new Imgadapter(getContext(),data,R.layout.newslist,
                 new String[]{"h1","h2","h3","h4","h5"},new int[]{R.id.h1,R.id.h2,R.id.h3,R.id.h4,R.id.h5}));
