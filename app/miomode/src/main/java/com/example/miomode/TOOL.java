@@ -180,7 +180,45 @@ public class TOOL {
             }
         });
     }
+public interface logingv
+{
+    void logingv();
+}
+public static void Loging(Context context,String username,String password,logingv logingv)
+{
+    POST("/prod-api/api/login", context, String.format("{\"username\":\"%s\",\"password\":\"%s\"}",username,usermsg ), new post() {
+        @Override
+        public void post(JSONObject jsonObject) throws JSONException {
+            Tokin=jsonObject.getString("token");
+            GETS("/prod-api/api/common/user/getInfo", new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                }
 
-
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    try {
+                        JSONObject msg=new JSONObject(response.body().string()).getJSONObject("user");
+                        usermsg[0]=msg.getString("userName");
+                        usermsg[1]=msg.getString("nickName");
+                        usermsg[2]=msg.getString("phonenumber");
+                        usermsg[3]=msg.getString("sex");
+                        usermsg[4]=msg.getString("idCard");
+                        logingv.logingv();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        if ((Activity)context!=null)
+                            ((Activity) context).runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(context, "账户或密码错误", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                    }
+                }
+            });
+        }
+    });
+}
 
 }
