@@ -37,11 +37,10 @@ public class TOOL {
         Call call=client.newCall(request);
         call.enqueue(callback);
     }
-    interface chuli
+ public  interface chuli
     {
         void chuli(JSONArray jsonObject) throws JSONException;
     }
-
 
     static public void GET(String url, chuli chuli)
     {
@@ -63,7 +62,7 @@ public class TOOL {
         });
     }
 
-    interface post
+    public interface post
     {
         void post(JSONObject jsonObject) throws JSONException;
     }
