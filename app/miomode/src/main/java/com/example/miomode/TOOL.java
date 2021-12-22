@@ -2,6 +2,7 @@ package com.example.miomode;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.text.Html;
 import android.util.Log;
 import android.widget.Toast;
 import org.json.JSONArray;
@@ -20,10 +21,10 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 //v16.14
 public class TOOL {
-    static public String mainurl="http://124.93.196.45:10001";
-    static public Object[] usermsg=new String[]{"","","","","",""};
+    static public String mainurl="http://124.93.196.45:10091";
+    static public Object[] usermsg=new String[]{"mio","","","","",""};
     static public String Tokin="";
-    static public ArrayList<HashMap<String,Object>> Alldata;
+    static public ArrayList<HashMap<String,Object>> Alldata=new ArrayList<>();
 
     static public void GETS(String url, Callback callback)
     {
@@ -125,7 +126,7 @@ public class TOOL {
         });
     }
 
-    static public void PUT(String url,Context context,String canshu,post post)
+    static public void PUT( Context context,String url, String canshu, post post)
     {
         ProgressDialog progressDialog=new ProgressDialog(context);
         progressDialog.setCancelable(false);
@@ -186,7 +187,7 @@ public interface logingv
 }
 public static void Loging(Context context,String username,String password,logingv logingv)
 {
-    POST("/prod-api/api/login", context, String.format("{\"username\":\"%s\",\"password\":\"%s\"}",username,usermsg ), new post() {
+    POST("/prod-api/api/login", context, String.format("{\"username\":\"%s\",\"password\":\"%s\"}",username,password ), new post() {
         @Override
         public void post(JSONObject jsonObject) throws JSONException {
             Tokin=jsonObject.getString("token");
@@ -220,5 +221,91 @@ public static void Loging(Context context,String username,String password,loging
         }
     });
 }
+
+public static void getnewsdata(chuli chuli)
+{
+    TOOL.GET("/prod-api/press/press/list", new TOOL.chuli() {
+        @Override
+        public void chuli(JSONArray jsonArray) throws JSONException {
+            for (int i = 0; i < jsonArray.length(); i++) {
+                HashMap<String, Object> hashMap = new HashMap<>();
+                hashMap.put("img", jsonArray.getJSONObject(i).getString("cover"));
+                hashMap.put("h0", jsonArray.getJSONObject(i).getString("title"));
+                hashMap.put("h1", Html.fromHtml( jsonArray.getJSONObject(i).getString("content")));
+                hashMap.put("h2", jsonArray.getJSONObject(i).getString("likeNum") + "点赞");
+                hashMap.put("h3", jsonArray.getJSONObject(i).getString("readNum") + "阅读");
+                hashMap.put("h4","日期："+ jsonArray.getJSONObject(i).getString("publishDate"));
+                hashMap.put("id", jsonArray.getJSONObject(i).getString("id"));
+                hashMap.put("type", jsonArray.getJSONObject(i).getString("type"));
+                Alldata.add(hashMap);
+                chuli.chuli(null);
+            }
+
+        }
+    });
+}
+
+public static void Updatamsg(Context context,String nickName,String phonenumber,String sex)
+{
+    String canshu= String.format("{\"nickName\": \"%s\",\"phonenumber\": \"%s\",\"sex\": \"%s\"}",
+            nickName,phonenumber,sex);
+    TOOL.PUT(context,"/prod-api/api/common/user", canshu, new TOOL.post() {
+        @Override
+        public void post(JSONObject jsonObject) throws JSONException {
+            Log.d("zjw", "post: "+jsonObject);
+          if (context!=null)
+              ((Activity)context).
+             runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(context, "信息修改成功！", Toast.LENGTH_SHORT).show();
+                    ((Activity)context).finish();
+                }
+            });
+        }
+    });
+}
+
+
+    public static void Updatapassword(Context context,String oldpassword,String newpassword)
+    {
+        String canshu= String.format("{\"newPassword\": \"%s\",\"oldPassword\": \"%s\"}",newpassword,oldpassword);
+        TOOL.PUT(context, "/prod-api/api/common/user/resetPwd", canshu, new TOOL.post() {
+            @Override
+            public void post(JSONObject jsonObject) throws JSONException {
+                Log.d("zjw", "post: "+jsonObject);
+                if (context!=null)
+                    ((Activity)context).
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(context, "修改密码成功！", Toast.LENGTH_SHORT).show();
+                        ((Activity)context).finish();
+                    }
+                });
+            }
+        });
+    }
+
+
+    public static void Submsg(Context context,String msg)
+    {
+        String cnashu = String.format("{\"content\": \"%s\",\"title\": \"反馈意见\"}",msg);
+        TOOL.POST("/prod-api/api/common/feedback",context, cnashu, new TOOL.post() {
+            @Override
+            public void post(JSONObject jsonObject) throws JSONException {
+                if (context!=null)
+                    ((Activity)context).
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(context, "反馈成功！", Toast.LENGTH_SHORT).show();
+                        ((Activity)context).finish();
+                    }
+                });
+            }
+        });
+    }
+
 
 }

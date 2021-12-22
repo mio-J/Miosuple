@@ -2,4 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.miomode">
 
+    <application>
+        <activity
+            android:name=".Daact"
+            android:exported="false" />
+        <activity
+            android:name=".Newsinformation"
+            android:exported="false" />
+    </application>
+
 </manifest>

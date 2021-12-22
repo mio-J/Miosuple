@@ -3,9 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Androidpoject_new/Miosuple/app/miomode/src/main/res/layout/activity_daact.xml" value="0.1716485507246377" />
         <entry key="..\:/Androidpoject_new/Miosuple/app/miomode/src/main/res/layout/activity_newsinformation.xml" value="0.25" />
-        <entry key="..\:/Androidpoject_new/Miosuple/app/miomode/src/main/res/layout/newslist.xml" value="0.18568840579710144" />
-        <entry key="..\:/Androidpoject_new/Miosuple/app/src/main/res/layout/activity_main.xml" value="0.19927536231884058" />
+        <entry key="..\:/Androidpoject_new/Miosuple/app/miomode/src/main/res/layout/card.xml" value="0.337037037037037" />
+        <entry key="..\:/Androidpoject_new/Miosuple/app/miomode/src/main/res/layout/hotitem.xml" value="0.2" />
+        <entry key="..\:/Androidpoject_new/Miosuple/app/miomode/src/main/res/layout/item.xml" value="0.337037037037037" />
+        <entry key="..\:/Androidpoject_new/Miosuple/app/miomode/src/main/res/layout/metroitem2.xml" value="0.337037037037037" />
+        <entry key="..\:/Androidpoject_new/Miosuple/app/miomode/src/main/res/layout/newslist.xml" value="0.5" />
+        <entry key="..\:/Androidpoject_new/Miosuple/app/miomode/src/main/res/layout/yiyuanitem.xml" value="0.337037037037037" />
+        <entry key="..\:/Androidpoject_new/Miosuple/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Androidpoject_new/Miosuple/app/src/main/res/layout/miotest.xml" value="0.18568840579710144" />
       </map>
     </option>

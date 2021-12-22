@@ -36,8 +36,8 @@ public class Newsinformation extends AppCompatActivity {
         initView();
         intent = getIntent();
         Glide.with(getApplicationContext()).load(TOOL.mainurl+ intent.getStringExtra("img")).into(imageView);
-        con.setText(intent.getStringExtra("h2"));
-        getSupportActionBar().setTitle(intent.getStringExtra("h1"));
+        con.setText(intent.getStringExtra("h1"));
+        getSupportActionBar().setTitle(intent.getStringExtra("h0"));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         newslist.get3();
         pinglunset();
