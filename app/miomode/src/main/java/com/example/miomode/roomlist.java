@@ -21,7 +21,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-class roomlist extends ListView {
+public class roomlist extends ListView {
     String[] lb=new String[]{"二手","租房","楼盘","中介"};
     private int page;
     private ArrayList<HashMap<String, Object>> data;

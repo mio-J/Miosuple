@@ -16,7 +16,7 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-class yiyuanlist extends ListView {
+public class yiyuanlist extends ListView {
 
     private ArrayList<HashMap<String, Object>> data;
     private Object tiaozhuan;
